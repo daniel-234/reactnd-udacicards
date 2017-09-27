@@ -12,9 +12,7 @@ function SubmitBtn({ onPress }) {
   )
 }
 
-
-
-export default class NewDeck extends Component {
+class NewDeck extends Component {
 	submit = (() => {
 		console.log('New Deck submitted')
 	})
@@ -30,3 +28,5 @@ export default class NewDeck extends Component {
 		)
 	}
 }
+
+export default NewDeck;
