@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducers';
 import DecksList from './components/DecksList';
 import NewDeck from './components/NewDeck';
 import { TabNavigator } from 'react-navigation';
@@ -35,9 +38,11 @@ class App extends Component {
        * sure the containers are either the height of the device or they
        * have a flex: 1 value.
        */
-      <View style={{flex: 1}}>
-        <Tabs />
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View style={{flex: 1}}>
+          <Tabs />
+        </View>
+      </Provider>
     );
   }
 }
