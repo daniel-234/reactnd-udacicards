@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { white, black, grey } from '../utils/colors';
+import { generateUUID } from '../utils/helpers';
+import { submitEntry } from '../utils/api';
 
 // Create a local `SubmitButton` component.
 function SubmitBtn({ onPress }) {
@@ -25,7 +27,27 @@ function Question() {
 
 class NewDeck extends Component {
 	submit = (() => {
-		console.log('New Deck submitted')
+		// Add an id to this deck
+		const key = generateUUID();
+
+		// TODO
+		// Get the deck title from the form.
+		const entry = {
+			// TODO
+			// Refactor
+			title: 'New deck'
+		};
+
+		// Update Redux
+
+		// Navigate to home
+
+		// Save to 'DB'
+		submitEntry({ entry, key });
+
+		// Clear local notification
+
+		console.log(entry.title + ' ' + key + ' submitted');
 	})
 
 	render() {
@@ -44,7 +66,6 @@ class NewDeck extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		// flexDirection: 'row',
 		justifyContent: 'space-around'
 	},
 	submitBtn: {
@@ -54,7 +75,6 @@ const styles = StyleSheet.create({
 		marginLeft: 100,
 		marginRight: 100,
 		borderRadius: 6,
-		// alignSelf: 'flex-end',
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
