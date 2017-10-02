@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { white, black, grey } from '../utils/colors';
 import { generateUUID } from '../utils/helpers';
-import { submitEntry } from '../utils/api';
+import { submitNewDeck, getStoredDecks } from '../utils/api';
+import { connect } from 'react-redux';
+import { addDeck } from '../actions';
 
 // Create a local `SubmitButton` component.
 function SubmitBtn({ onPress }) {
@@ -32,25 +34,43 @@ class NewDeck extends Component {
 
 		// TODO
 		// Get the deck title from the form.
-		const entry = {
+		const newDeck = {
 			// TODO
 			// Refactor
 			title: 'New deck'
 		};
 
 		// Update Redux
+		this.props.dispatch(addDeck({
+			[key]: newDeck
+		}));
 
 		// Navigate to home
 
 		// Save to 'DB'
-		submitEntry({ entry, key });
+		submitNewDeck(key, newDeck)
+			// .then(items => (
+			// 	console.log(items)
+			// ))
+			// .catch(err => (
+			// 	console.log(err)
+			// ))
+		// Delete later
+		// getStoredDecks()
+		// 	.then(items => (
+		// 		console.log(items)
+		// 	))
+		// 	.catch(err => (
+		// 		console.log(err)
+		// 	));
 
 		// Clear local notification
 
-		console.log(entry.title + ' ' + key + ' submitted');
+		console.log(newDeck.title + ' ' + key + ' submitted');
 	})
 
 	render() {
+		console.log(this.props);
 		return (
 			<View style={styles.container}>
 				<Question />
@@ -90,4 +110,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default NewDeck;
+export default connect()(NewDeck)
