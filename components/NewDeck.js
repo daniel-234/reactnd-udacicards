@@ -48,23 +48,7 @@ class NewDeck extends Component {
 		// Navigate to home
 
 		// Save to 'DB'
-		submitNewDeck(key, newDeck)
-			// .then(items => (
-			// 	console.log(items)
-			// ))
-			// .catch(err => (
-			// 	console.log(err)
-			// ))
-		// Delete later
-		// getStoredDecks()
-		// 	.then(items => (
-		// 		console.log(items)
-		// 	))
-		// 	.catch(err => (
-		// 		console.log(err)
-		// 	));
-
-		// Clear local notification
+		submitNewDeck(key, newDeck);
 
 		console.log(newDeck.title + ' ' + key + ' submitted');
 	})
