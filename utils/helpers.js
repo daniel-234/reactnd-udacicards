@@ -9,3 +9,13 @@ export const generateUUID = function uuidv4() {
     return v.toString(16);
   });
 }
+
+/*
+ * Get results data as argument in JSON format and return a JavaScript
+ * object.
+ */
+export const formatResults = function resultsFromAsyncCall(results) {
+	// Build a decks object from the JSON string `results`.
+	const decks = JSON.parse(results);
+	return decks;
+}

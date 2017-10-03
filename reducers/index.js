@@ -4,7 +4,7 @@ function decks(state = {}, action) {
 	switch(action.type) {
 		case RECEIVE_DECKS:
 			console.log(state);
-			console.log(action);
+			console.log(action.decks);
 			return {
 				...state,
 				...action.decks
