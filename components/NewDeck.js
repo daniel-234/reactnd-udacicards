@@ -5,6 +5,7 @@ import { generateUUID } from '../utils/helpers';
 import { submitNewDeck, getStoredDecks } from '../utils/api';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions';
+import { NavigationActions } from 'react-navigation';
 
 // Create a local `SubmitButton` component.
 function SubmitBtn({ onPress }) {
@@ -49,15 +50,22 @@ class NewDeck extends Component {
 			[key]: newDeck
 		}));
 
-		// Navigate to home
-
 		// Save to 'DB'
 		submitNewDeck(key, newDeck);
 
 		this.setState({text: ''})
 
+		// Navgate to home.
+		this.toHome();
+
 		console.log(newDeck.title + ' ' + key + ' submitted');
 	})
+
+	toHome = () => {
+		this.props.navigation.dispatch(NavigationActions.back({
+			key: 'NewDeck'
+		}))
+	}
 
 	render() {
 		console.log(this.props);

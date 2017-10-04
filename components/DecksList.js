@@ -41,7 +41,7 @@ class DecksList extends Component {
 							}
 						)}
 					>
-						{key}
+						{decks[key].title}
 					</Text>
 				))}
 			</View>
