@@ -19,16 +19,6 @@ class DecksList extends Component {
 	render() {
 		const decks = this.props.decks;
 		console.log(decks);
-		// console.log(decks.length);
-		// console.log(Object.keys(decks).length);
-		// console.log(Object.keys(decks));
-
-		// const keys = Object.keys(decks).map(function(key) {
-		// 	return JSON.stringify(decks[keys])
-		// })
-
-		// console.log(keys);
-
 		return (
 			<View>
 				{Object.keys(decks).map((key) => (

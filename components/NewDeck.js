@@ -30,31 +30,46 @@ function Question() {
 
 class NewDeck extends Component {
 	state = {
-		text: ''
+		text: '',
+		/*
+		 * Keep track of how many decks have been inserted. Used when a
+		 * user doesn't write a title and the app automatically sets it
+		 * with the progressive number of the current desk.
+		 */
+		decksCounter: 1
 	};
 
 	submit = (() => {
 		// Add an id to this deck
 		const key = generateUUID();
-
-		// TODO
+		/*
+		 * Store a title for the deck. If there is a not empty string value,
+		 * take it. Otherwise, assign an automatic title to the deck, with
+		 * the current deck progressive number.
+		 */
+		const titleText = this.state.text ? this.state.text : 'New Deck ' +
+			this.state.decksCounter;
 		// Get the deck title from the form.
 		const newDeck = {
 			// TODO
 			// Refactor
-			title: this.state.text
+			title: titleText
 		};
-
-		// Update Redux
+		// Update Redux adding the new deck to the store.
 		this.props.dispatch(addDeck({
 			[key]: newDeck
 		}));
-
-		// Save to 'DB'
+		// Save to 'DB' (AsyncStorage has been used here).
 		submitNewDeck(key, newDeck);
-
-		this.setState({text: ''})
-
+		/*
+		 * Set the state text value back to the empty screen.
+		 * Increment the decks counter. Used to assign a progressive
+		 * number as a new deck without title is created.
+		 */
+		this.setState((state) => ({
+			text: '',
+			decksCounter: this.state.decksCounter + 1
+		}));
 		// Navgate to home.
 		this.toHome();
 
@@ -76,8 +91,8 @@ class NewDeck extends Component {
 					placeholder='Deck Title'
 					value={this.state.text}
 	      	onChangeText={(text) => this.setState({text})}
+	      	maxLength={35}
 	      />
-				<Text style={{alignSelf: 'center'}}>FORM PLACEHOLDER</Text>
 				<SubmitBtn
 					onPress={this.submit}
 				/>
@@ -113,4 +128,10 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default connect()(NewDeck)
+function mapStateToProps(decks) {
+	return decks;
+}
+
+export default connect(
+	mapStateToProps
+)(NewDeck);

@@ -54,9 +54,7 @@ class App extends Component {
        */
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
-          <MainNavigator
-            // screenProps={}
-          />
+          <MainNavigator />
         </View>
       </Provider>
     );

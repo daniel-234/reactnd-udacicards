@@ -5,6 +5,7 @@ const DECKS_STORAGE_KEY = 'UdaciCards: decks';
 
 export function fetchAllDecks() {
 	console.log(AsyncStorage.getItem(DECKS_STORAGE_KEY));
+	AsyncStorage.clear();
 	return AsyncStorage.getItem(DECKS_STORAGE_KEY)
 		.then(formatResults)
 }
@@ -19,7 +20,7 @@ export function submitNewDeck(key, deck) {
 		  AsyncStorage.multiGet(keys, (err, stores) => {
 		  	console.log(stores);
 		   stores.map((result, i, store) => {
-		     // get at each store's key/value so you can work with it
+		     // Get at each store's key/value so you can work with it
 		     let key = store[i][0];
 		     let value = store[i][1];
 		     console.log(key);
