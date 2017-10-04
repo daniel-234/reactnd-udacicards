@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, TextInput, StyleSheet } from 'react-native';
 import { white, black, grey } from '../utils/colors';
 import { generateUUID } from '../utils/helpers';
 import { submitNewDeck, getStoredDecks } from '../utils/api';
@@ -28,6 +28,10 @@ function Question() {
 }
 
 class NewDeck extends Component {
+	state = {
+		text: ''
+	};
+
 	submit = (() => {
 		// Add an id to this deck
 		const key = generateUUID();
@@ -37,7 +41,7 @@ class NewDeck extends Component {
 		const newDeck = {
 			// TODO
 			// Refactor
-			title: 'New deck'
+			title: this.state.text
 		};
 
 		// Update Redux
@@ -50,6 +54,8 @@ class NewDeck extends Component {
 		// Save to 'DB'
 		submitNewDeck(key, newDeck);
 
+		this.setState({text: ''})
+
 		console.log(newDeck.title + ' ' + key + ' submitted');
 	})
 
@@ -58,6 +64,11 @@ class NewDeck extends Component {
 		return (
 			<View style={styles.container}>
 				<Question />
+				<TextInput
+					placeholder='Deck Title'
+					value={this.state.text}
+	      	onChangeText={(text) => this.setState({text})}
+	      />
 				<Text style={{alignSelf: 'center'}}>FORM PLACEHOLDER</Text>
 				<SubmitBtn
 					onPress={this.submit}
