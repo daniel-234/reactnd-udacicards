@@ -5,7 +5,8 @@ import { Provider } from 'react-redux';
 import reducer from './reducers';
 import DecksList from './components/DecksList';
 import NewDeck from './components/NewDeck';
-import { TabNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator } from 'react-navigation';
+import DeckDetail from './components/DeckDetail';
 
 const Tabs = TabNavigator({
   DecksList: {
@@ -22,8 +23,21 @@ const Tabs = TabNavigator({
   }
 });
 
+const MainNavigator = StackNavigator({
+  Home: {
+    screen: Tabs
+  },
+  DeckDetail: {
+    screen: DeckDetail,
+    navigationOptions: ({navigation}) => ({
+      title: `${navigation.state.params.title}`
+    })
+  }
+});
+
 class App extends Component {
   render() {
+    console.log(this.props);
     return (
       /*
        * Give this parent Component View a flex value of 1.
@@ -40,7 +54,9 @@ class App extends Component {
        */
       <Provider store={createStore(reducer)}>
         <View style={{flex: 1}}>
-          <Tabs />
+          <MainNavigator
+            // screenProps={}
+          />
         </View>
       </Provider>
     );

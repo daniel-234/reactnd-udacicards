@@ -32,7 +32,15 @@ class DecksList extends Component {
 		return (
 			<View>
 				{Object.keys(decks).map((key) => (
-					<Text key={key}>
+					<Text
+						key={key}
+						onPress={() => this.props.navigation.navigate(
+							'DeckDetail',
+							{ entryId: key,
+								title: decks[key].title
+							}
+						)}
+					>
 						{key}
 					</Text>
 				))}
