@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+import { addQuestion } from '../actions';
 import { white, black, red } from '../utils/colors';
+import { submitNewQuestion } from '../utils/api';
 
 // Create a local `SubmitButton` component.
 function SubmitBtn({ onPress }) {
@@ -21,9 +24,15 @@ class NewQuestion extends Component {
 	}
 
 	submit = (() => {
-		if (this.state.question && this.state.answer) {
-			console.log(this.state.question);
-			console.log(this.state.answer);
+		const { question, answer } = this.state;
+		const cardKey = this.props.navigation.state.params.key;
+
+		if (question && answer) {
+			console.log(question);
+			console.log(answer);
+
+			// Save to 'DB' (AsyncStorage has been used here).
+			submitNewQuestion(cardKey, question, answer);
 			this.setState({
 				show: false
 			});
@@ -32,6 +41,13 @@ class NewQuestion extends Component {
 				show: true
 			});
 		}
+
+		// Update Redux adding the new deck to the store.
+		this.props.dispatch(addQuestion({
+			cardKey,
+			question,
+			answer
+		}));
 
 		this.setState({
 			question: '',
@@ -52,6 +68,7 @@ class NewQuestion extends Component {
 	});
 
 	render() {
+		console.log(this.props);
 		return (
 			<View style={styles.container}>
 				<TextInput
@@ -102,4 +119,5 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default NewQuestion;
+export default connect()(NewQuestion);
+// export default NewQuestion;

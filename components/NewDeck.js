@@ -30,7 +30,7 @@ function Question() {
 
 class NewDeck extends Component {
 	state = {
-		text: '',
+		title: '',
 		/*
 		 * Keep track of how many decks have been inserted. Used when a
 		 * user doesn't write a title and the app automatically sets it
@@ -40,20 +40,19 @@ class NewDeck extends Component {
 	};
 
 	submit = (() => {
-		// Add an id to this deck
-		const key = generateUUID();
 		/*
 		 * Store a title for the deck. If there is a not empty string value,
 		 * take it. Otherwise, assign an automatic title to the deck, with
 		 * the current deck progressive number.
 		 */
-		const titleText = this.state.text ? this.state.text : 'New Deck ' +
+		const titleText = this.state.title ? this.state.title : 'New Deck ' +
 			this.state.decksCounter;
+		// Add an id to this deck
+		const key = titleText;
 		// Get the deck title from the form.
 		const newDeck = {
-			// TODO
-			// Refactor
-			title: titleText
+			title: titleText,
+			questions: []
 		};
 		// Update Redux adding the new deck to the store.
 		this.props.dispatch(addDeck({
@@ -67,7 +66,7 @@ class NewDeck extends Component {
 		 * number as a new deck without title is created.
 		 */
 		this.setState((state) => ({
-			text: '',
+			title: '',
 			decksCounter: this.state.decksCounter + 1
 		}));
 		// Navgate to home.
@@ -89,8 +88,8 @@ class NewDeck extends Component {
 				<Question />
 				<TextInput
 					placeholder='Deck Title'
-					value={this.state.text}
-	      	onChangeText={(text) => this.setState({text})}
+					value={this.state.title}
+	      	onChangeText={(title) => this.setState({title})}
 	      	maxLength={35}
 	      />
 				<SubmitBtn

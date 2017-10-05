@@ -26,7 +26,8 @@ class DecksList extends Component {
 						key={key}
 						onPress={() => this.props.navigation.navigate(
 							'DeckDetail',
-							{ entryId: key,
+							{
+								entryId: key,
 								title: decks[key].title
 							}
 						)}

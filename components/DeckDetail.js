@@ -27,7 +27,10 @@ class DeckDetail extends Component {
 				</Text>
 				<SubmitBtn
 					onPress={() => this.props.navigation.navigate(
-						'NewQuestion'
+						'NewQuestion',
+						{
+							key: this.props.navigation.state.params.title
+						}
 					)}
 				/>
 			</View>
