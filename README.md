@@ -34,3 +34,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * [Forums Expo - Genymotion is not responding - Error](https://forums.expo.io/t/genymotion-is-not-responding-error/547/18)
 * [GitHub - React Navigation Issues - Stacking Tab Navigators shows blank screens](https://github.com/react-community/react-navigation/issues/1627)
+* [Stackoverflow - Programmatically add a component in React Native](https://stackoverflow.com/questions/35471921/programmatically-add-a-component-in-react-native)
