@@ -25,14 +25,14 @@ class NewQuestion extends Component {
 
 	submit = (() => {
 		const { question, answer } = this.state;
-		const cardKey = this.props.navigation.state.params.key;
+		const cardTitle = this.props.navigation.state.params.title;
 
 		if (question && answer) {
 			console.log(question);
 			console.log(answer);
 
 			// Save to 'DB' (AsyncStorage has been used here).
-			submitNewQuestion(cardKey, question, answer);
+			submitNewQuestion(cardTitle, question, answer);
 			this.setState({
 				show: false
 			});
@@ -44,7 +44,7 @@ class NewQuestion extends Component {
 
 		// Update Redux adding the new deck to the store.
 		this.props.dispatch(addQuestion({
-			cardKey,
+			cardTitle,
 			question,
 			answer
 		}));

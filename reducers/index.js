@@ -19,15 +19,15 @@ function decks(state = {}, action) {
 		case ADD_QUESTION:
 			const question = action.question;
 			console.log(question);
-			const cardKey = question.cardKey;
-			console.log(cardKey);
+			const cardTitle = question.cardTitle;
+			console.log(cardTitle);
 			console.log(state);
 			const result = {
 				...state,
-				[cardKey]: {
-					...state[cardKey],
+				[cardTitle]: {
+					...state[cardTitle],
 					questions: [
-						...state[cardKey].questions,
+						...state[cardTitle].questions,
 						{
 							question: question.question,
 							answer: question.answer

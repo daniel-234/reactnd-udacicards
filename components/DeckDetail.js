@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import { white, black, grey } from '../utils/colors';
 // import NewQuestion from './NewQuestion';
@@ -27,6 +28,23 @@ function StartQuizBtn({ onPress }) {
 }
 
 class DeckDetail extends Component {
+	startQuiz = (() => {
+		const deckTitle = this.props.navigation.state.params.title;
+		const questions = this.props.decks[deckTitle].questions;
+		if (questions.length) {
+			return (
+				<StartQuizBtn
+					onPress={() => this.props.navigation.navigate(
+						'Quiz',
+						{
+							title: this.props.navigation.state.params.title
+						}
+					)}
+				/>
+			);
+		}
+	})
+
 	render() {
 		console.log(this.props);
 		return (
@@ -40,18 +58,12 @@ class DeckDetail extends Component {
 					onPress={() => this.props.navigation.navigate(
 						'NewQuestion',
 						{
-							key: this.props.navigation.state.params.title
+							title: this.props.navigation.state.params.title
 						}
 					)}
 				/>
-				<StartQuizBtn
-					onPress={() => this.props.navigation.navigate(
-						'Quiz',
-						{
-							key: this.props.navigation.state.params.title
-						}
-					)}
-				/>
+				{this.startQuiz()}
+
 			</View>
 		);
 	}
@@ -96,4 +108,12 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default DeckDetail;
+function mapStateToProps(decks) {
+	return {
+		decks
+	};
+}
+
+export default connect(
+	mapStateToProps
+)(DeckDetail);
