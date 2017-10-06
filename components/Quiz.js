@@ -47,12 +47,20 @@ class Quiz extends Component {
 		const questions = this.props.decks[deckTitle].questions;
 		const question = questions[this.state.currentQuestion].question;
 
+		const currentQuestionToVisualize = this.state.currentQuestion + 1;
+		const numberOfQuestions = this.state.numberOfQuestions;
+
 		// let currentQuestion = 0;
 		console.log(deckTitle);
 		console.log(questions);
 		// console.log(numberOfQuestions);
 		return (
 			<View>
+				<Text>
+					{
+						currentQuestionToVisualize + '/' + numberOfQuestions
+					}
+				</Text>
 				<Text>
 					{
 						question
