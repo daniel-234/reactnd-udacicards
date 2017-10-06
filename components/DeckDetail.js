@@ -4,13 +4,24 @@ import { StackNavigator } from 'react-navigation';
 import { white, black, grey } from '../utils/colors';
 // import NewQuestion from './NewQuestion';
 
-// Create a local `SubmitButton` component.
-function SubmitBtn({ onPress }) {
+// Create a local `AddCardButton` component.
+function AddCardBtn({ onPress }) {
   return (
     <TouchableOpacity
-    	style={styles.submitBtn}
+    	style={styles.addCardBtn}
       onPress={onPress}>
-      <Text style={styles.submitBtnText}>Add Card</Text>
+      <Text style={styles.addCardBtnText}>Add Card</Text>
+    </TouchableOpacity>
+  );
+}
+
+// Create a local `AddCardButton` component.
+function StartQuizBtn({ onPress }) {
+  return (
+    <TouchableOpacity
+    	style={styles.startQuizBtn}
+      onPress={onPress}>
+      <Text style={styles.startQuizBtnText}>Start Quiz</Text>
     </TouchableOpacity>
   );
 }
@@ -25,9 +36,17 @@ class DeckDetail extends Component {
 						JSON.stringify(this.props.navigation.state.params.title)
 					}
 				</Text>
-				<SubmitBtn
+				<AddCardBtn
 					onPress={() => this.props.navigation.navigate(
 						'NewQuestion',
+						{
+							key: this.props.navigation.state.params.title
+						}
+					)}
+				/>
+				<StartQuizBtn
+					onPress={() => this.props.navigation.navigate(
+						'Quiz',
 						{
 							key: this.props.navigation.state.params.title
 						}
@@ -43,17 +62,34 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'space-around'
 	},
-	submitBtn: {
+	addCardBtn: {
+		backgroundColor: white,
+		padding: 10,
+		height: 45,
+		marginLeft: 100,
+		marginRight: 100,
+		marginTop: 10,
+		borderRadius: 6,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	addCardBtnText: {
+		color: black,
+		fontSize: 22,
+		textAlign: 'center'
+	},
+	startQuizBtn: {
 		backgroundColor: black,
 		padding: 10,
 		height: 45,
 		marginLeft: 100,
 		marginRight: 100,
+		marginTop: 10,
 		borderRadius: 6,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
-	submitBtnText: {
+	startQuizBtnText: {
 		color: white,
 		fontSize: 22,
 		textAlign: 'center'

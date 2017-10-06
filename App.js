@@ -8,6 +8,7 @@ import NewDeck from './components/NewDeck';
 import { TabNavigator, StackNavigator } from 'react-navigation';
 import DeckDetail from './components/DeckDetail';
 import NewQuestion from './components/NewQuestion';
+import Quiz from './components/Quiz';
 
 const Tabs = TabNavigator({
   DecksList: {
@@ -38,6 +39,12 @@ const MainNavigator = StackNavigator({
     screen: NewQuestion,
     navigationOptions: {
       title: 'Add Card'
+    }
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: {
+      title: 'Quiz'
     }
   }
 });
