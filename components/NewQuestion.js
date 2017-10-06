@@ -83,7 +83,7 @@ class NewQuestion extends Component {
 	      	onChangeText={(answer) => this.setState({answer})}
 	      	maxLength={150}
 	      />
-	      {this.showAlertMessage()}
+	      { this.showAlertMessage() }
 				<SubmitBtn
 					onPress={this.submit}
 				/>

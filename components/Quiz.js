@@ -14,10 +14,26 @@ function SubmitBtn({ onPress }) {
   );
 }
 
+function Card({ textDisplayed, linkToFlip, flipFunc }) {
+	return (
+		<View>
+			<Text>
+				{ textDisplayed }
+			</Text>
+			<Text
+				onPress={() => flipFunc()}
+			>
+				{ linkToFlip }
+			</Text>
+		</View>
+	);
+}
+
 class Quiz extends Component {
 	state = {
 		currentQuestion: 0,
-		numberOfQuestions: 0
+		numberOfQuestions: 0,
+		front: true
 	}
 
 	componentDidMount() {
@@ -36,9 +52,41 @@ class Quiz extends Component {
 		console.log(numberOfQuestions);
 		if (currentQuestion < numberOfQuestions - 1) {
 			this.setState((prevState) => ({
-				currentQuestion: prevState.currentQuestion + 1
+				currentQuestion: prevState.currentQuestion + 1,
+				front: true
 			}))
 		}
+	})
+
+	flipCard = (() => {
+		this.setState((prevState) => ({
+			front: !prevState.front
+		}))
+	})
+
+	displayCard = ((question, answer, flipCard) => {
+		const currentSide = this.state.front;
+		let text;
+		let link;
+		console.log(question);
+		console.log(answer);
+		// console.log(flipCard);
+		console.log(currentSide);
+		if (currentSide === true) {
+			text = question;
+			link = 'Answer';
+		} else {
+			text = answer;
+			link = 'Question';
+		}
+
+		return (
+			<Card
+				textDisplayed={text}
+				linkToFlip={link}
+				flipFunc={flipCard}
+			/>
+		);
 	})
 
 	render() {
@@ -46,6 +94,7 @@ class Quiz extends Component {
 		const deckTitle = this.props.navigation.state.params.title;
 		const questions = this.props.decks[deckTitle].questions;
 		const question = questions[this.state.currentQuestion].question;
+		const answer = questions[this.state.currentQuestion].answer;
 
 		const currentQuestionToVisualize = this.state.currentQuestion + 1;
 		const numberOfQuestions = this.state.numberOfQuestions;
@@ -61,11 +110,15 @@ class Quiz extends Component {
 						currentQuestionToVisualize + '/' + numberOfQuestions
 					}
 				</Text>
+				{ /*
 				<Text>
 					{
 						question
 					}
 				</Text>
+			*/}
+				{ this.displayCard(question, answer, this.flipCard) }
+				{ console.log(this.state.cardSide) }
 				<SubmitBtn
 					onPress={this.submit}
 				/>
