@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import { white, black, grey } from '../utils/colors';
+import { clearLocalNotification, setLocalNotification } from '../utils/api';
 // import NewQuestion from './NewQuestion';
 
 // Create a local `AddCardButton` component.
@@ -16,7 +17,7 @@ function AddCardBtn({ onPress }) {
   );
 }
 
-// Create a local `AddCardButton` component.
+// Create a local `StartQuizButton` component.
 function StartQuizBtn({ onPress }) {
   return (
     <TouchableOpacity
@@ -32,6 +33,8 @@ class DeckDetail extends Component {
 		const deckTitle = this.props.navigation.state.params.title;
 		const questions = this.props.decks[deckTitle].questions;
 		if (questions.length) {
+			clearLocalNotification()
+			 .then(setLocalNotification)
 			return (
 				<StartQuizBtn
 					onPress={() => this.props.navigation.navigate(

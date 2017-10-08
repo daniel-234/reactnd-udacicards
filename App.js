@@ -9,6 +9,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 import DeckDetail from './components/DeckDetail';
 import NewQuestion from './components/NewQuestion';
 import Quiz from './components/Quiz';
+import { setLocalNotification } from './utils/api';
 
 const Tabs = TabNavigator({
   DecksList: {
@@ -50,6 +51,10 @@ const MainNavigator = StackNavigator({
 });
 
 class App extends Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+
   render() {
     console.log(this.props);
     return (
