@@ -35,3 +35,6 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * [Forums Expo - Genymotion is not responding - Error](https://forums.expo.io/t/genymotion-is-not-responding-error/547/18)
 * [GitHub - React Navigation Issues - Stacking Tab Navigators shows blank screens](https://github.com/react-community/react-navigation/issues/1627)
 * [Stackoverflow - Programmatically add a component in React Native](https://stackoverflow.com/questions/35471921/programmatically-add-a-component-in-react-native)
+* The code used for local notifiction to remind users to study for a specific day, if they haven't already done so, was entirely taken from one of the lessons the instructor built fro the React Native course hosted by Udacity:
+* [GitHub Udacity: React UdaciFitness - helpers](https://github.com/udacity/reactnd-UdaciFitness-complete/blob/8c4b20d9620970e475806bfe8f61308bc336b465/utils/helpers.js)
+* [GitHub Udacity: React UdaciFitness - updates for userLocalNotification](https://github.com/udacity/reactnd-UdaciFitness-complete/commit/63778456f674355e40044c673f4b966ebd446866)
