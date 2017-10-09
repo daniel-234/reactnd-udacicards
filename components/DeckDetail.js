@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import { white, black, grey } from '../utils/colors';
-import { clearLocalNotification, setLocalNotification } from '../utils/api';
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 // import NewQuestion from './NewQuestion';
 
 // Create a local `AddCardButton` component.

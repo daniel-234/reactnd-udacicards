@@ -3,7 +3,6 @@ import { formatResults } from './helpers';
 import { Notifications, Permissions } from 'expo';
 
 const DECKS_STORAGE_KEY = 'UdaciCards:decks';
-const NOTIFICATION_KEY = 'UdaciCards:notifications';
 
 export function fetchAllDecks() {
 	console.log(AsyncStorage.getItem(DECKS_STORAGE_KEY));
@@ -22,9 +21,10 @@ export function submitNewQuestion(cardKey, question, answer) {
 		});
 
 		decks[cardKey] = cardChosen;
-		// console.log(decks);
-		// console.log(cardChosen);
-		// console.log(cardKey);
+
+		console.log(decks);
+		console.log(cardChosen);
+		console.log(cardKey);
 
 		AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decks), () => {
 			AsyncStorage.getItem(DECKS_STORAGE_KEY, (err, result) => {
@@ -53,58 +53,4 @@ export function submitNewDeck(key, deck) {
 		  });
 		});
 	})
-}
-
-/*
- * Code taken from the `Notification` lesson in the Udacity React Native course.
- */
-export function clearLocalNotification() {
-	return AsyncStorage.removeItem(NOTIFICATION_KEY)
-		.then(Notifications.cancelAllScheduledNotificationsAsync)
-}
-
-function createNotification() {
-	return {
-		title: 'Remember to study!',
-		body: 'Hey, don\'t forget to study today, if you haven\'t already!',
-		ios: {
-			sound: true
-		},
-		android: {
-			sound: true,
-			priority: 'high',
-			sticky: false,
-			vibrate: true
-		}
-	}
-}
-
-export function setLocalNotification() {
-  AsyncStorage.getItem(NOTIFICATION_KEY)
-    .then(JSON.parse)
-    .then((data) => {
-      if (data === null) {
-        Permissions.askAsync(Permissions.NOTIFICATIONS)
-          .then(({ status }) => {
-            if (status === 'granted') {
-              Notifications.cancelAllScheduledNotificationsAsync();
-
-              let tomorrow = new Date();
-              tomorrow.setDate(tomorrow.getDate() + 1);
-              tomorrow.setHours(18);
-              tomorrow.setMintutes(0);
-
-              Notifications.scheduleLocalNotificationAsync(
-                createNotification(),
-                {
-                  time: tomorrow,
-                  repeat: 'day',
-                }
-              )
-
-              AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
-            }
-          })
-      }
-    })
 }

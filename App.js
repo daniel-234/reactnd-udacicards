@@ -9,7 +9,7 @@ import { TabNavigator, StackNavigator } from 'react-navigation';
 import DeckDetail from './components/DeckDetail';
 import NewQuestion from './components/NewQuestion';
 import Quiz from './components/Quiz';
-import { setLocalNotification } from './utils/api';
+import { setLocalNotification } from './utils/helpers';
 
 const Tabs = TabNavigator({
   DecksList: {
