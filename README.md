@@ -40,3 +40,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * [GitHub Udacity: React UdaciFitness - updates for userLocalNotification](https://github.com/udacity/reactnd-UdaciFitness-complete/commit/63778456f674355e40044c673f4b966ebd446866)
 * Set headers to `null` in TabNavigator setting the `navigationOptions` parameter:
 * [GitHub - React UdaciFitness - Changes for TabNavigator](https://github.com/udacity/reactnd-UdaciFitness-complete/commit/9ff26370e4e5593195fdcad4d85e74f540a39220)
+* I found an issue when I had to go back to previous screen from inside a nested StackNavigator. The official documentation and the instructor pointed out that the `back` action creator takes back an optional parameter key, but in this case the solution (after much trial and errors) was to NOT provide any key at all (contrary to the case already resolved of TabNavigator where a key was accepted - see `NewDeck`):
+* [GitHub - React UdaciFitness - Changes for finish navigation](https://github.com/udacity/reactnd-UdaciFitness-complete/commit/18aeee6aac40702c2d86cf976a9a67c5691505cf)
+* [React Navigation Docs - Navigation actions - back](https://reactnavigation.org/docs/navigators/navigation-actions#Back)
+* [GitHub - React Navigation issues ](https://github.com/react-community/react-navigation/issues/697)
