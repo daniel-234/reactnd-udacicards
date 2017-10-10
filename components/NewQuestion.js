@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { addQuestion } from '../actions';
 import { white, black, red } from '../utils/colors';
 import { submitNewQuestion } from '../utils/api';
+import { NavigationActions } from 'react-navigation';
 
 // Create a local `SubmitButton` component.
 function SubmitBtn({ onPress }) {
@@ -20,10 +21,14 @@ class NewQuestion extends Component {
 	state = {
 		question: '',
 		answer: '',
-		show: false
+		/*
+		 * If set to true, display a message to the user asking to
+		 * insert both question and answer.
+		 */
+		showMessage: false
 	}
 
-	submit = (() => {
+	submit = () => {
 		const { question, answer } = this.state;
 		const cardTitle = this.props.navigation.state.params.title;
 
@@ -33,30 +38,43 @@ class NewQuestion extends Component {
 
 			// Save to 'DB' (AsyncStorage has been used here).
 			submitNewQuestion(cardTitle, question, answer);
+
 			this.setState({
-				show: false
+				showMessage: false
 			});
+
+			// Update Redux adding the new deck to the store.
+			this.props.dispatch(addQuestion({
+				cardTitle,
+				question,
+				answer
+			}));
+
+			this.goBack();
+
+
 		} else {
 			this.setState({
-				show: true
+				showMessage: true
 			});
 		}
 
-		// Update Redux adding the new deck to the store.
-		this.props.dispatch(addQuestion({
-			cardTitle,
-			question,
-			answer
-		}));
-
 		this.setState({
-			question: '',
-			answer: ''
-		});
-	})
+				question: '',
+				answer: ''
+			});
 
-	showAlertMessage = (() => {
-		if (this.state.show) {
+
+
+	}
+
+	goBack = () => {
+		console.log('home')
+		this.props.navigation.dispatch(NavigationActions.back())
+	}
+
+	showAlertMessage = () => {
+		if (this.state.showMessage) {
 			return (
 				<Text style={styles.message}>
 					Please, provide both a question and an answer.
@@ -65,7 +83,7 @@ class NewQuestion extends Component {
 		} else {
 			return null
 		};
-	});
+	};
 
 	render() {
 		console.log(this.props);
