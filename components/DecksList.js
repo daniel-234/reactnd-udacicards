@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { receiveDecks } from '../actions';
 import { fetchAllDecks } from '../utils/api';
 
-function Deck({ title, navigation }) {
+function Deck({ title, questions, navigation }) {
 	return (
 		<View>
 			<Text
@@ -16,7 +16,7 @@ function Deck({ title, navigation }) {
 					}
 				)}
 			>
-				{title}
+				{title} {'     -  ' + questions.length + ' cards'}
 			</Text>
 		</View>
 	);
