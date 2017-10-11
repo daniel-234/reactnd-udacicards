@@ -23,11 +23,10 @@ To install the application, you can (fork and) download it and then run the comm
 
 ## Notes
 
-IMPORTANT: This project has just been started and the code you are looking at is still incomplete.
+**IMPORTANT**: This app has only been tested on an Android device (a Samsung S6, through an emulator) and not on any iOS phone or emulation platform.
 
 Why this project? This app has been created as the final project for the React Nanodegree at Udacity and encompasses the fundamental aspects of building a native application including handling infinite lists, routing and user input. By building it, students of the [React Nanodegree Program at Udacity](https://www.udacity.com/course/react-nanodegree--nd019) will gain an understanding of how to use react Native to build an iOs and Android application.
 Although the emulation platform is not strictly speaking a building tool, I included it because of its importance in this work.
-IMPORTANT: This app has only been tested on an Android device (a Samsung S6, through an emulator) and not on any iOS phone or emulation platform.
 
 ## License
 

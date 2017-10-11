@@ -50,15 +50,12 @@ function createNotification() {
 }
 
 export function setLocalNotification() {
-	// AsyncStorage.clear()
   AsyncStorage.getItem(NOTIFICATION_KEY)
     .then((result) => {
     	const res = JSON.parse(result)
-    	console.log(res)
     	return res;
     })
     .then((data) => {
-    	console.log(data)
       if (data === null) {
         Permissions.askAsync(Permissions.NOTIFICATIONS)
           .then(({ status }) => {
@@ -77,11 +74,6 @@ export function setLocalNotification() {
                   repeat: 'day',
                 }
               )
-
-              // Notifications.presentLocalNotificationAsync(
-              //   createNotification()
-              // )
-
               AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
             }
           })

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import { white, black, grey, darkGrey } from '../utils/colors';
 import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
-// import NewQuestion from './NewQuestion';
 
 // Create a local `AddCardButton` component.
 function AddCardBtn({ onPress }) {
@@ -32,6 +31,10 @@ class DeckDetail extends Component {
 	startQuiz = (() => {
 		const deckTitle = this.props.navigation.state.params.title;
 		const questions = this.props.decks[deckTitle].questions;
+		/*
+		 * Visualize the `start quiz` button only if there are questions
+		 * inside this deck.
+		 */
 		if (questions.length) {
 			clearLocalNotification()
 			 .then(setLocalNotification)
@@ -40,7 +43,7 @@ class DeckDetail extends Component {
 					onPress={() => this.props.navigation.navigate(
 						'Quiz',
 						{
-							title: this.props.navigation.state.params.title
+							title: deckTitle
 						}
 					)}
 				/>
@@ -49,11 +52,9 @@ class DeckDetail extends Component {
 	})
 
 	render() {
-		console.log(this.props);
 		const decks = this.props.decks;
 		const deckTitle = this.props.navigation.state.params.title;
 		const questionsNumber = decks[deckTitle].questions.length;
-		console.log(questionsNumber);
 		return (
 			<View style={styles.container}>
 				{

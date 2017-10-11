@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, TextInput, StyleSheet } from 'react-native';
-import { white, black, grey, darkGrey } from '../utils/colors';
-import { generateUUID } from '../utils/helpers';
-import { submitNewDeck, getStoredDecks } from '../utils/api';
 import { connect } from 'react-redux';
 import { addDeck } from '../actions';
 import { NavigationActions } from 'react-navigation';
+import { white, black, grey, darkGrey } from '../utils/colors';
+import { generateUUID } from '../utils/helpers';
+import { submitNewDeck, getStoredDecks } from '../utils/api';
 
 // Create a local `SubmitButton` component.
 function SubmitBtn({ onPress }) {
@@ -18,6 +18,7 @@ function SubmitBtn({ onPress }) {
   );
 }
 
+// Create a local `Question` component.
 function Question() {
 	return (
 		<View>
@@ -39,30 +40,24 @@ class NewDeck extends Component {
 	};
 
 	submit = (() => {
-		// Get the decks from props (passed by `mapStateToProps`)
+		// Get the decks from props (passed by `mapStateToProps`).
 		const decks = this.props.decks
 		// Store the progressive number of the next deck to be added.
 		const nextDeckNumber = Object.keys(decks).length + 1;
-		/*
-		 * Store a title for the deck. If there is a not empty string value,
-		 * take it. Otherwise, assign an automatic title to the deck, with
-		 * the current deck progressive number.
-		 */
-		console.log(nextDeckNumber);
 		/*
 		 * If the user provided a title, use it. Otherwise build one, with
 		 * the progressive number of the next deck.
 		 */
 		const titleText = this.state.title ? this.state.title : 'New Deck ' +
 			nextDeckNumber;
-		// Add an id to this deck
+		// Store the deck title as key.
 		const key = titleText;
 		// Get the deck title from the form.
 		const newDeck = {
 			title: titleText,
 			questions: []
 		};
-		// Update Redux adding the new deck to the store.
+		// Update Redux by adding the new deck to the store.
 		this.props.dispatch(addDeck({
 			[key]: newDeck
 		}));
@@ -78,10 +73,9 @@ class NewDeck extends Component {
 		});
 		// Navgate to home.
 		this.toHome();
-
-		console.log(key + ' submitted');
 	})
 
+	// Navigate back to the default View (DecksList).
 	toHome = () => {
 		this.props.navigation.dispatch(NavigationActions.back({
 			key: 'NewDeck'
@@ -89,11 +83,6 @@ class NewDeck extends Component {
 	}
 
 	render() {
-		console.log(this.props);
-		const decks = this.props.decks;
-		console.log(decks);
-		const decksNumber = Object.keys(decks).length;
-		console.log(decksNumber);
 		return (
 			<View style={styles.container}>
 				<Question />

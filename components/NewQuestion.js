@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 import { addQuestion } from '../actions';
 import { white, black, red, grey } from '../utils/colors';
 import { submitNewQuestion } from '../utils/api';
-import { NavigationActions } from 'react-navigation';
 
 // Create a local `SubmitButton` component.
 function SubmitBtn({ onPress }) {
@@ -31,26 +31,30 @@ class NewQuestion extends Component {
 	submit = () => {
 		const { question, answer } = this.state;
 		const cardTitle = this.props.navigation.state.params.title;
-
+		// Check if the user provided both question and answer.
 		if (question && answer) {
-			console.log(question);
-			console.log(answer);
-
 			// Save to 'DB' (AsyncStorage has been used here).
 			submitNewQuestion(cardTitle, question, answer);
-
+			/*
+			 * Once the user submitted both question and answer, the
+			 * warning message must not be shown (hide it if it was
+			 * previoulsy displayed).
+			 */
 			this.setState({
 				showMessage: false
 			});
-
 			// Update Redux adding the new deck to the store.
 			this.props.dispatch(addQuestion({
 				cardTitle,
 				question,
 				answer
 			}));
-
+			// Go back to the Deck View.
 			this.goBack();
+		/*
+		 * If the user didn't provide both a question and an answer,
+		 * show a warning message.
+		 */
 		} else {
 			this.setState({
 				showMessage: true
@@ -58,11 +62,12 @@ class NewQuestion extends Component {
 		}
 	}
 
+	// Go back to the Deck View.
 	goBack = () => {
-		console.log('home')
 		this.props.navigation.dispatch(NavigationActions.back())
 	}
 
+	// Display the warning message.
 	showAlertMessage = () => {
 		if (this.state.showMessage) {
 			return (
@@ -76,7 +81,6 @@ class NewQuestion extends Component {
 	};
 
 	render() {
-		console.log(this.props);
 		return (
 			<View style={styles.container}>
 				<View style={styles.inputContainer}>
@@ -95,6 +99,11 @@ class NewQuestion extends Component {
 		      	style={styles.input}
 		      />
 				</View>
+				{
+					/*
+					 * Display the alert message if the condition is met.
+					 */
+				}
 	      { this.showAlertMessage() }
 				<SubmitBtn
 					onPress={this.submit}
@@ -146,4 +155,3 @@ const styles = StyleSheet.create({
 });
 
 export default connect()(NewQuestion);
-// export default NewQuestion;

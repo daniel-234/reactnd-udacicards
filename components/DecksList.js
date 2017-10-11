@@ -15,6 +15,7 @@ function Deck({ title, questions, navigation }) {
 				}
 			)}
 			style={styles.deck}
+			key={title}
 		>
 			<Text style={styles.title}>
 				{title}
@@ -29,28 +30,29 @@ function Deck({ title, questions, navigation }) {
 class DecksList extends Component {
 	componentDidMount() {
 		const { dispatch } = this.props;
-
+		// Fetch all decks from AsyncStorage.
 		fetchAllDecks()
 		.then((decks) => {
-			console.log(decks)
+			// Dispatch an action to receive the retrieved decks.
 			dispatch(receiveDecks(decks))
 		})
-		console.log(this.props);
 	}
 
+	// Render each deck inside the FlatList Component.
 	renderItem = ({ item }) => {
 		return <Deck {...item} navigation={this.props.navigation} />
 	}
 
 	render() {
 		const decks = this.props.decks;
-		console.log(decks);
-		console.log(this.props);
 		const decksArray = [];
+		/*
+		 * Get the `decks` object from props and build an array to pass
+		 * to the FlatList.
+		 */
 		Object.keys(decks).map((title) => (
 			decksArray.push(decks[title])
 		))
-		console.log(decksArray);
 		return (
 			<View style={styles.container}>
 				<FlatList

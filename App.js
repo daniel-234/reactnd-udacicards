@@ -3,15 +3,16 @@ import { View } from 'react-native';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducer from './reducers';
+import { TabNavigator, StackNavigator } from 'react-navigation';
 import DecksList from './components/DecksList';
 import NewDeck from './components/NewDeck';
-import { TabNavigator, StackNavigator } from 'react-navigation';
 import DeckDetail from './components/DeckDetail';
 import NewQuestion from './components/NewQuestion';
 import Quiz from './components/Quiz';
 import { setLocalNotification } from './utils/helpers';
 import { white, lightBlue, black } from './utils/colors';
 
+// TabNavigator Component.
 const Tabs = TabNavigator({
   DecksList: {
     screen: DecksList,
@@ -36,9 +37,11 @@ const Tabs = TabNavigator({
   }
 });
 
+// StackNavigator Component.
 const MainNavigator = StackNavigator({
   Home: {
     screen: Tabs,
+    // Remove the header.
     navigationOptions: {
       header: null
     }
@@ -50,6 +53,7 @@ const MainNavigator = StackNavigator({
       headerStyle: {
         backgroundColor: black,
       },
+      // Change the color of the header text.
       headerTitleStyle: {
         color: white
       },
@@ -91,7 +95,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       /*
        * Give this parent Component View a flex value of 1.
