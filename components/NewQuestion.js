@@ -91,7 +91,7 @@ class NewQuestion extends Component {
 						placeholder='Enter the answer'
 						value={this.state.answer}
 		      	onChangeText={(answer) => this.setState({answer})}
-		      	maxLength={150}
+		      	maxLength={100}
 		      	style={styles.input}
 		      />
 				</View>

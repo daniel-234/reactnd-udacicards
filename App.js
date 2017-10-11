@@ -67,14 +67,20 @@ const MainNavigator = StackNavigator({
       headerTitleStyle: {
         color: white
       },
-      // Change color to the `back` arrow.
       headerTintColor: white
     }
   },
   Quiz: {
     screen: Quiz,
     navigationOptions: {
-      title: 'Quiz'
+      title: 'Quiz',
+      headerStyle: {
+        backgroundColor: black,
+      },
+      headerTitleStyle: {
+        color: white
+      },
+      headerTintColor: white
     }
   }
 });

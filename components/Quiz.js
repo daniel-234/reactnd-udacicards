@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet  } from 'react-native';
 import { connect } from 'react-redux';
-import { white, black, green, red, grey } from '../utils/colors';
+import { white, black, green, red, grey, darkGrey } from '../utils/colors';
 import { NavigationActions } from 'react-navigation';
 
 // Create a local `CorrectButton` component.
@@ -52,14 +52,15 @@ function RestartQuizBtn({ onPress }) {
 
 function Card({ textDisplayed, linkToFlip, flipFunc }) {
 	return (
-		<View>
-			<Text>
-				{ textDisplayed }
+		<View style={styles.card}>
+			<Text style={styles.mainText}>
+				{textDisplayed}
 			</Text>
 			<Text
 				onPress={() => flipFunc()}
+				style={styles.secondaryText}
 			>
-				{ linkToFlip }
+				{linkToFlip}
 			</Text>
 		</View>
 	);
@@ -149,7 +150,7 @@ class Quiz extends Component {
 		// console.log(flipCard);
 		console.log(currentSide);
 		if (totalAnswers === numberOfQuestions) {
-			text = 'Your score is ' + correctAnswers + ' / ' + totalAnswers + '.';
+			text = 'You answered ' + (correctAnswers * 100 / totalAnswers) + '% of the questions.';
 			// link = undefined;
 			console.log('Questions finished');
 
@@ -230,9 +231,9 @@ class Quiz extends Component {
 		// console.log(numberOfQuestions);
 		return (
 			<View style={styles.container}>
-				<Text>
+				<Text style={styles.counter}>
 					{
-						totalAnswers + '/' + numberOfQuestions
+						totalAnswers + ' / ' + numberOfQuestions
 					}
 				</Text>
 				{ /*
@@ -263,7 +264,7 @@ class Quiz extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'space-around',
+		justifyContent: 'flex-start',
 		backgroundColor: white
 	},
 	correctBtn: {
@@ -321,6 +322,26 @@ const styles = StyleSheet.create({
 		borderRadius: 6,
 		justifyContent: 'center',
 		alignItems: 'center'
+	},
+	mainText: {
+		color: darkGrey,
+		fontSize: 34,
+		textAlign: 'center'
+	},
+	secondaryText: {
+		color: red,
+		fontSize: 14,
+		textAlign: 'center'
+	},
+	counter: {
+		color: darkGrey,
+		marginLeft: 10,
+		marginTop: 10,
+		fontSize: 16,
+	},
+	card: {
+		marginTop: 140,
+		marginBottom: 80
 	}
 });
 
