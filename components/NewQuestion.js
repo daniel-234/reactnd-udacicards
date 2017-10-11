@@ -51,21 +51,11 @@ class NewQuestion extends Component {
 			}));
 
 			this.goBack();
-
-
 		} else {
 			this.setState({
 				showMessage: true
 			});
 		}
-
-		this.setState({
-				question: '',
-				answer: ''
-			});
-
-
-
 	}
 
 	goBack = () => {
