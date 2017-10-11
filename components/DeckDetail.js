@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
-import { white, black, grey } from '../utils/colors';
+import { white, black, grey, darkGrey } from '../utils/colors';
 import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 // import NewQuestion from './NewQuestion';
 
@@ -50,25 +50,41 @@ class DeckDetail extends Component {
 
 	render() {
 		console.log(this.props);
+		const decks = this.props.decks;
+		const deckTitle = this.props.navigation.state.params.title;
+		const questionsNumber = decks[deckTitle].questions.length;
+		console.log(questionsNumber);
 		return (
-			<View
-				// style={styles.container}
-			>
-				<Text>
-					Deck Detail - {
-						JSON.stringify(this.props.navigation.state.params.title)
-					}
-				</Text>
-				<AddCardBtn
-					onPress={() => this.props.navigation.navigate(
-						'NewQuestion',
-						{
-							title: this.props.navigation.state.params.title
-						}
-					)}
-				/>
-				{this.startQuiz()}
-
+			<View style={styles.container}>
+				{
+					/*
+					 * Text container
+					 */
+				}
+				<View style={styles.textContainer}>
+					<Text style={styles.deckTitle}>
+						{deckTitle}
+					</Text>
+					<Text	style={styles.cardsNumber}>
+						{questionsNumber + ' cards'}
+					</Text>
+				</View>
+				{
+					/*
+					 * Buttons container
+					 */
+				}
+				<View>
+					<AddCardBtn
+						onPress={() => this.props.navigation.navigate(
+							'NewQuestion',
+							{
+								title: deckTitle
+							}
+						)}
+					/>
+					{this.startQuiz()}
+				</View>
 			</View>
 		);
 	}
@@ -77,13 +93,15 @@ class DeckDetail extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'space-around',
+		justifyContent: 'flex-start',
+		alignItems: 'center',
 		backgroundColor: white
 	},
 	addCardBtn: {
 		backgroundColor: white,
 		padding: 10,
 		height: 45,
+		width: 200,
 		marginLeft: 100,
 		marginRight: 100,
 		marginTop: 10,
@@ -95,13 +113,14 @@ const styles = StyleSheet.create({
 	},
 	addCardBtnText: {
 		color: black,
-		fontSize: 22,
+		fontSize: 16,
 		textAlign: 'center'
 	},
 	startQuizBtn: {
 		backgroundColor: black,
 		padding: 10,
 		height: 45,
+		width: 200,
 		marginLeft: 100,
 		marginRight: 100,
 		marginTop: 10,
@@ -111,8 +130,22 @@ const styles = StyleSheet.create({
 	},
 	startQuizBtnText: {
 		color: white,
+		fontSize: 16,
+		textAlign: 'center'
+	},
+	deckTitle: {
+		color: darkGrey,
+		fontSize: 32,
+		textAlign: 'center'
+	},
+	cardsNumber: {
+		color: grey,
 		fontSize: 22,
 		textAlign: 'center'
+	},
+	textContainer: {
+		marginTop: 120,
+		marginBottom: 120
 	}
 });
 

@@ -46,7 +46,15 @@ const MainNavigator = StackNavigator({
   DeckDetail: {
     screen: DeckDetail,
     navigationOptions: ({navigation}) => ({
-      title: `${navigation.state.params.title}`
+      title: `${navigation.state.params.title}`,
+      headerStyle: {
+        backgroundColor: black,
+      },
+      headerTitleStyle: {
+        color: white
+      },
+      // Change color to the `back` arrow.
+      headerTintColor: white
     })
   },
   NewQuestion: {
