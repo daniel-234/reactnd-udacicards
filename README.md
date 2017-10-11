@@ -12,6 +12,9 @@ To install the application, you can (fork and) download it and then run the comm
 ## Built With
 
 * [React Native](https://facebook.github.io/react-native/) - A framework for building native apps using React
+* [React](https://reactjs.org/) - A JavaScript library fro building user interfaces
+* [Redux](http://redux.js.org/) - A predictable state container for JavaScript apps
+* [React Navigation](https://reactnavigation.org/) - A library for an extensible yet easy-to-use navigation solution
 * [Genymotion Android Emulator](https://www.genymotion.com/) - An easy and very powerful Android emulation platform for app developers and testers
 
 ## Author
