@@ -41,20 +41,20 @@ class NewDeck extends Component {
 	submit = (() => {
 		// Get the decks from props (passed by `mapStateToProps`)
 		const decks = this.props.decks
-		// Count the number of properties in the decks object.
-		const decksCounter = Object.keys(decks).length;
+		// Store the progressive number of the next deck to be added.
+		const nextDeckNumber = Object.keys(decks).length + 1;
 		/*
 		 * Store a title for the deck. If there is a not empty string value,
 		 * take it. Otherwise, assign an automatic title to the deck, with
 		 * the current deck progressive number.
 		 */
-		console.log(decksCounter);
+		console.log(nextDeckNumber);
 		/*
 		 * If the user provided a title, use it. Otherwise build one, with
 		 * the progressive number of the next deck.
 		 */
 		const titleText = this.state.title ? this.state.title : 'New Deck ' +
-			decksCounter;
+			nextDeckNumber;
 		// Add an id to this deck
 		const key = titleText;
 		// Get the deck title from the form.
