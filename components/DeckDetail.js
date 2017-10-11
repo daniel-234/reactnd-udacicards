@@ -51,7 +51,9 @@ class DeckDetail extends Component {
 	render() {
 		console.log(this.props);
 		return (
-			<View>
+			<View
+				// style={styles.container}
+			>
 				<Text>
 					Deck Detail - {
 						JSON.stringify(this.props.navigation.state.params.title)
@@ -75,7 +77,8 @@ class DeckDetail extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'space-around'
+		justifyContent: 'space-around',
+		backgroundColor: white
 	},
 	addCardBtn: {
 		backgroundColor: white,
@@ -85,6 +88,8 @@ const styles = StyleSheet.create({
 		marginRight: 100,
 		marginTop: 10,
 		borderRadius: 6,
+		borderWidth: 1,
+		borderColor: grey,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},

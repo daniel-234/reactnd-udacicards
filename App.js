@@ -10,6 +10,7 @@ import DeckDetail from './components/DeckDetail';
 import NewQuestion from './components/NewQuestion';
 import Quiz from './components/Quiz';
 import { setLocalNotification } from './utils/helpers';
+import { white, lightBlue, black } from './utils/colors';
 
 const Tabs = TabNavigator({
   DecksList: {
@@ -22,6 +23,15 @@ const Tabs = TabNavigator({
     screen: NewDeck,
     navigationOptions: {
       tabBarLabel: 'New Deck'
+    }
+  }
+}, {
+  tabBarOptions: {
+    style: {
+      backgroundColor: lightBlue
+    },
+    labelStyle: {
+      color: black
     }
   }
 });

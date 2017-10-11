@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet  } from 'react-native';
 import { connect } from 'react-redux';
-import { white, black, green, red } from '../utils/colors';
+import { white, black, green, red, grey } from '../utils/colors';
 import { NavigationActions } from 'react-navigation';
 
 // Create a local `CorrectButton` component.
@@ -31,7 +31,8 @@ function BackToDeckBtn({ onPress }) {
   return (
     <TouchableOpacity
     	style={styles.backToDeckBtn}
-      onPress={onPress}>
+      onPress={onPress}
+    >
       <Text style={styles.backToDeckBtnText}>Back to Deck</Text>
     </TouchableOpacity>
   );
@@ -42,7 +43,8 @@ function RestartQuizBtn({ onPress }) {
   return (
     <TouchableOpacity
     	style={styles.restartQuizBtn}
-      onPress={onPress}>
+      onPress={onPress}
+    >
       <Text style={styles.submitBtnText}>Restart Quiz</Text>
     </TouchableOpacity>
   );
@@ -198,12 +200,14 @@ class Quiz extends Component {
 					linkToFlip={link}
 					flipFunc={flipCard}
 				/>
-				<CorrectBtn
-					onPress={this.submitCorrect}
-				/>
-				<IncorrectBtn
-					onPress={this.submitIncorrect}
-				/>
+				<View>
+					<CorrectBtn
+						onPress={this.submitCorrect}
+					/>
+					<IncorrectBtn
+						onPress={this.submitIncorrect}
+					/>
+				</View>
 			</View>
 
 		);
@@ -225,7 +229,7 @@ class Quiz extends Component {
 		console.log(questions);
 		// console.log(numberOfQuestions);
 		return (
-			<View>
+			<View style={styles.container}>
 				<Text>
 					{
 						totalAnswers + '/' + numberOfQuestions
@@ -259,7 +263,8 @@ class Quiz extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'space-around'
+		justifyContent: 'space-around',
+		backgroundColor: white
 	},
 	correctBtn: {
 		backgroundColor: green,
@@ -296,6 +301,8 @@ const styles = StyleSheet.create({
 		marginRight: 100,
 		marginTop: 10,
 		borderRadius: 6,
+		borderWidth: 1,
+		borderColor: grey,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},

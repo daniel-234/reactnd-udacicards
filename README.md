@@ -47,3 +47,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * [GitHub - React UdaciFitness - Changes for finish navigation](https://github.com/udacity/reactnd-UdaciFitness-complete/commit/18aeee6aac40702c2d86cf976a9a67c5691505cf)
 * [React Navigation Docs - Navigation actions - back](https://reactnavigation.org/docs/navigators/navigation-actions#Back)
 * [GitHub - React Navigation issues ](https://github.com/react-community/react-navigation/issues/697)
+* [Stackoverflow - React Native View onPress does not work](https://stackoverflow.com/questions/43665177/react-native-view-onpress-does-not-work)

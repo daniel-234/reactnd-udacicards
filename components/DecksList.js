@@ -1,23 +1,28 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, FlatList } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { receiveDecks } from '../actions';
 import { fetchAllDecks } from '../utils/api';
+import { white, black, grey, darkGrey } from '../utils/colors';
 
 function Deck({ title, questions, navigation }) {
 	return (
-		<View>
-			<Text
-				onPress={() => navigation.navigate(
-					'DeckDetail',
-					{
-						title: title
-					}
-				)}
-			>
-				{title} {'     -  ' + questions.length + ' cards'}
+		<TouchableOpacity
+			onPress={() => navigation.navigate(
+				'DeckDetail',
+				{
+					title: title
+				}
+			)}
+			style={styles.deck}
+		>
+			<Text style={styles.title}>
+				{title}
 			</Text>
-		</View>
+			<Text	style={styles.cardsNumber}>
+				{questions.length + ' cards'}
+			</Text>
+		</TouchableOpacity>
 	);
 }
 
@@ -47,7 +52,7 @@ class DecksList extends Component {
 		))
 		console.log(decksArray);
 		return (
-			<View>
+			<View style={styles.container}>
 				<FlatList
 					data={decksArray}
 					extraData={this.props}
@@ -57,6 +62,29 @@ class DecksList extends Component {
 		);
 	}
 };
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'space-around',
+		backgroundColor: white
+	},
+	deck: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		height: 150,
+		borderBottomColor: grey,
+		borderBottomWidth: 0.8
+	},
+	title: {
+		color: darkGrey,
+		fontSize: 22
+	},
+	cardsNumber: {
+		color: grey,
+		fontSize: 16
+	}
+});
 
 function mapStateToProps(decks) {
 	return {
