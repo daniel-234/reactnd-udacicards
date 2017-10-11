@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, TouchableOpacity, Text, TextInput, StyleSheet } from 'react-native';
-import { white, black, grey } from '../utils/colors';
+import { white, black, grey, darkGrey } from '../utils/colors';
 import { generateUUID } from '../utils/helpers';
 import { submitNewDeck, getStoredDecks } from '../utils/api';
 import { connect } from 'react-redux';
@@ -102,6 +102,7 @@ class NewDeck extends Component {
 					value={this.state.title}
 	      	onChangeText={(title) => this.setState({title})}
 	      	maxLength={35}
+	      	style={styles.input}
 	      />
 				<SubmitBtn
 					onPress={this.submit}
@@ -114,7 +115,6 @@ class NewDeck extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'space-around',
 		backgroundColor: white
 	},
 	submitBtn: {
@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
 		height: 45,
 		marginLeft: 100,
 		marginRight: 100,
+		marginTop: 60,
 		borderRadius: 6,
 		justifyContent: 'center',
 		alignItems: 'center'
@@ -133,9 +134,19 @@ const styles = StyleSheet.create({
 		textAlign: 'center'
 	},
 	question: {
-		color: grey,
+		color: darkGrey,
 		fontSize: 32,
-		textAlign: 'center'
+		textAlign: 'center',
+		marginTop: 80
+	},
+	input: {
+		borderRadius: 4,
+		borderWidth: 1,
+		borderColor: grey,
+		marginTop: 60,
+		height: 40,
+		width: 270,
+		alignSelf: 'center'
 	}
 });
 
