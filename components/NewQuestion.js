@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { addQuestion } from '../actions';
-import { white, black, red } from '../utils/colors';
+import { white, black, red, grey } from '../utils/colors';
 import { submitNewQuestion } from '../utils/api';
 import { NavigationActions } from 'react-navigation';
 
@@ -79,18 +79,22 @@ class NewQuestion extends Component {
 		console.log(this.props);
 		return (
 			<View style={styles.container}>
-				<TextInput
-					placeholder='Enter a new question'
-					value={this.state.question}
-	      	onChangeText={(question) => this.setState({question})}
-	      	maxLength={50}
-	      />
-	      <TextInput
-					placeholder='Enter the answer'
-					value={this.state.answer}
-	      	onChangeText={(answer) => this.setState({answer})}
-	      	maxLength={150}
-	      />
+				<View style={styles.inputContainer}>
+					<TextInput
+						placeholder='Enter a new question'
+						value={this.state.question}
+		      	onChangeText={(question) => this.setState({question})}
+		      	maxLength={50}
+		      	style={styles.input}
+		      />
+		      <TextInput
+						placeholder='Enter the answer'
+						value={this.state.answer}
+		      	onChangeText={(answer) => this.setState({answer})}
+		      	maxLength={150}
+		      	style={styles.input}
+		      />
+				</View>
 	      { this.showAlertMessage() }
 				<SubmitBtn
 					onPress={this.submit}
@@ -103,7 +107,7 @@ class NewQuestion extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		justifyContent: 'space-around',
+		justifyContent: 'flex-start',
 		backgroundColor: white
 	},
 	submitBtn: {
@@ -125,6 +129,19 @@ const styles = StyleSheet.create({
 		color: red,
 		fontSize: 16,
 		textAlign: 'center'
+	},
+	input: {
+		borderRadius: 4,
+		borderWidth: 1,
+		borderColor: grey,
+		marginTop: 30,
+		height: 40,
+		width: 300,
+		alignSelf: 'center'
+	},
+	inputContainer: {
+		marginTop: 140,
+		marginBottom: 60
 	}
 });
 

@@ -60,7 +60,15 @@ const MainNavigator = StackNavigator({
   NewQuestion: {
     screen: NewQuestion,
     navigationOptions: {
-      title: 'Add Card'
+      title: 'Add Card',
+      headerStyle: {
+        backgroundColor: black,
+      },
+      headerTitleStyle: {
+        color: white
+      },
+      // Change color to the `back` arrow.
+      headerTintColor: white
     }
   },
   Quiz: {
