@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet  } from 'react-native';
 import { connect } from 'react-redux';
 import { white, black, green, red } from '../utils/colors';
+import { NavigationActions } from 'react-navigation';
 
 // Create a local `CorrectButton` component.
 function CorrectBtn({ onPress }) {
@@ -21,6 +22,28 @@ function IncorrectBtn({ onPress }) {
     	style={styles.incorrectBtn}
       onPress={onPress}>
       <Text style={styles.submitBtnText}>Incorrect</Text>
+    </TouchableOpacity>
+  );
+}
+
+// Create a local `AddCardButton` component.
+function BackToDeckBtn({ onPress }) {
+  return (
+    <TouchableOpacity
+    	style={styles.backToDeckBtn}
+      onPress={onPress}>
+      <Text style={styles.backToDeckBtnText}>Back to Deck</Text>
+    </TouchableOpacity>
+  );
+}
+
+// Create a local `StartQuizButton` component.
+function RestartQuizBtn({ onPress }) {
+  return (
+    <TouchableOpacity
+    	style={styles.restartQuizBtn}
+      onPress={onPress}>
+      <Text style={styles.submitBtnText}>Restart Quiz</Text>
     </TouchableOpacity>
   );
 }
@@ -114,6 +137,7 @@ class Quiz extends Component {
 		const incorrectAnswers = this.state.incorrectAnswers;
 		const totalAnswers = correctAnswers + incorrectAnswers;
 		const numberOfQuestions = this.state.numberOfQuestions;
+		const deckTitle = this.props.navigation.state.params.title;
 		let text;
 		let link;
 		console.log(question);
@@ -133,6 +157,22 @@ class Quiz extends Component {
 						textDisplayed={text}
 						// linkToFlip={link}
 						// flipFunc={flipCard}
+					/>
+					<BackToDeckBtn
+						onPress={() => this.props.navigation.navigate(
+							'DeckDetail',
+					{
+						title: deckTitle
+					}
+						)}
+					/>
+					<RestartQuizBtn
+						onPress={() => this.props.navigation.navigate(
+							'Quiz',
+							{
+								title: deckTitle
+							}
+						)}
 					/>
 				</View>
 
@@ -247,6 +287,33 @@ const styles = StyleSheet.create({
 		color: white,
 		fontSize: 22,
 		textAlign: 'center'
+	},
+	backToDeckBtn: {
+		backgroundColor: white,
+		padding: 10,
+		height: 45,
+		marginLeft: 100,
+		marginRight: 100,
+		marginTop: 10,
+		borderRadius: 6,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	backToDeckBtnText: {
+		color: black,
+		fontSize: 22,
+		textAlign: 'center'
+	},
+	restartQuizBtn: {
+		backgroundColor: black,
+		padding: 10,
+		height: 45,
+		marginLeft: 100,
+		marginRight: 100,
+		marginTop: 10,
+		borderRadius: 6,
+		justifyContent: 'center',
+		alignItems: 'center'
 	}
 });
 
