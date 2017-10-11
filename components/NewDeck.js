@@ -30,23 +30,31 @@ function Question() {
 
 class NewDeck extends Component {
 	state = {
-		title: '',
+		title: ''
 		/*
 		 * Keep track of how many decks have been inserted. Used when a
 		 * user doesn't write a title and the app automatically sets it
 		 * with the progressive number of the current desk.
 		 */
-		decksCounter: 1
 	};
 
 	submit = (() => {
+		// Get the decks from props (passed by `mapStateToProps`)
+		const decks = this.props.decks
+		// Count the number of properties in the decks object.
+		const decksCounter = Object.keys(decks).length;
 		/*
 		 * Store a title for the deck. If there is a not empty string value,
 		 * take it. Otherwise, assign an automatic title to the deck, with
 		 * the current deck progressive number.
 		 */
+		console.log(decksCounter);
+		/*
+		 * If the user provided a title, use it. Otherwise build one, with
+		 * the progressive number of the next deck.
+		 */
 		const titleText = this.state.title ? this.state.title : 'New Deck ' +
-			this.state.decksCounter;
+			decksCounter;
 		// Add an id to this deck
 		const key = titleText;
 		// Get the deck title from the form.
@@ -65,14 +73,13 @@ class NewDeck extends Component {
 		 * Increment the decks counter. Used to assign a progressive
 		 * number as a new deck without title is created.
 		 */
-		this.setState((state) => ({
-			title: '',
-			decksCounter: this.state.decksCounter + 1
-		}));
+		this.setState({
+			title: ''
+		});
 		// Navgate to home.
 		this.toHome();
 
-		console.log(newDeck.title + ' ' + key + ' submitted');
+		console.log(key + ' submitted');
 	})
 
 	toHome = () => {
@@ -83,6 +90,10 @@ class NewDeck extends Component {
 
 	render() {
 		console.log(this.props);
+		const decks = this.props.decks;
+		console.log(decks);
+		const decksNumber = Object.keys(decks).length;
+		console.log(decksNumber);
 		return (
 			<View style={styles.container}>
 				<Question />
@@ -128,7 +139,9 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps(decks) {
-	return decks;
+	return {
+		decks
+	};
 }
 
 export default connect(

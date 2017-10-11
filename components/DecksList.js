@@ -11,7 +11,6 @@ function Deck({ title, questions, navigation }) {
 				onPress={() => navigation.navigate(
 					'DeckDetail',
 					{
-						// entryId: key,
 						title: title
 					}
 				)}
@@ -34,7 +33,6 @@ class DecksList extends Component {
 		console.log(this.props);
 	}
 
-
 	renderItem = ({ item }) => {
 		return <Deck {...item} navigation={this.props.navigation} />
 	}
@@ -55,40 +53,6 @@ class DecksList extends Component {
 					extraData={this.props}
 					renderItem={this.renderItem}
 				/>
-				{
-					/* decksArray.map(({ title }) => (
-					// <Text
-					// 	key={key}
-					// 	onPress={() => this.props.navigation.navigate(
-					// 		'DeckDetail',
-					// 		{
-					// 			entryId: key,
-					// 			title: decks[key].title
-					// 		}
-					// 	)}
-					// >
-					// 	{decks[key].title}
-					// </Text>
-
-					<Deck
-						key={title}
-						title={title}
-						navigation={
-						// 	() => this.props.navigation.navigate(
-						// 	'DeckDetail',
-						// 	{
-						// 		// entryId: key,
-						// 		title: title
-						// 	}
-						// )
-						this.props.navigation
-
-
-					}
-					/>
-				))
-
-			*/}
 			</View>
 		);
 	}
