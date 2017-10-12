@@ -10,7 +10,6 @@ export function receiveDecks(decks) {
 }
 
 export function addDeck(deck) {
-	console.log('Add deck action dispatched');
 	return {
 		type: ADD_DECK,
 		deck
@@ -18,7 +17,6 @@ export function addDeck(deck) {
 }
 
 export function addQuestion(question) {
-	console.log(question);
 	return {
 		type: ADD_QUESTION,
 		question

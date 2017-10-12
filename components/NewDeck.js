@@ -83,7 +83,6 @@ class NewDeck extends Component {
 				title: title
 			}
 		)
-		console.log(title)
 	}
 
 	render() {
