@@ -3,7 +3,6 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { StackNavigator } from 'react-navigation';
 import { white, black, grey, darkGrey } from '../utils/colors';
-import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 
 // Create a local `AddCardButton` component.
 function AddCardBtn({ onPress }) {
@@ -36,8 +35,6 @@ class DeckDetail extends Component {
 		 * inside this deck.
 		 */
 		if (questions.length) {
-			clearLocalNotification()
-			 .then(setLocalNotification)
 			return (
 				<StartQuizBtn
 					onPress={() => this.props.navigation.navigate(

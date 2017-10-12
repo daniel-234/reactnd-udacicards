@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet  } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 import { white, black, green, red, grey, darkGrey } from '../utils/colors';
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers';
 
 // Create a local `CorrectButton` component.
 function CorrectBtn({ onPress }) {
@@ -139,7 +140,12 @@ class Quiz extends Component {
 		// Check if all questions have been answered.
 		if (totalAnswers === numberOfQuestions) {
 			text = 'You answered correctly to ' + (correctAnswers * 100 / totalAnswers) + '% of the questions.';
-
+			/*
+			 * If the user has completed at least one quiz for the day,
+			 * clear the push notification and set it for the next day.
+			 */
+			clearLocalNotification()
+			 .then(setLocalNotification)
 			return (
 				<View>
 					<Card
