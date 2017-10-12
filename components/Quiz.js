@@ -138,7 +138,7 @@ class Quiz extends Component {
 		let link;
 		// Check if all questions have been answered.
 		if (totalAnswers === numberOfQuestions) {
-			text = 'You answered ' + (correctAnswers * 100 / totalAnswers) + '% of the questions.';
+			text = 'You answered correctly to ' + (correctAnswers * 100 / totalAnswers) + '% of the questions.';
 
 			return (
 				<View>

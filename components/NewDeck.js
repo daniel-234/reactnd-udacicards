@@ -71,15 +71,19 @@ class NewDeck extends Component {
 		this.setState({
 			title: ''
 		});
-		// Navgate to home.
-		this.toHome();
+		// Route the user to the Individual Deck View for the new Deck.
+		this.toDeckView(titleText);
 	})
 
-	// Navigate back to the default View (DecksList).
-	toHome = () => {
-		this.props.navigation.dispatch(NavigationActions.back({
-			key: 'NewDeck'
-		}))
+	// Navigate to the DeckDetail View, passing a title property.
+	toDeckView = (title) => {
+		this.props.navigation.navigate(
+			'DeckDetail',
+			{
+				title: title
+			}
+		)
+		console.log(title)
 	}
 
 	render() {
