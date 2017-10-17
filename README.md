@@ -48,3 +48,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 * [React Navigation Docs - Navigation actions - back](https://reactnavigation.org/docs/navigators/navigation-actions#Back)
 * [GitHub - React Navigation issues ](https://github.com/react-community/react-navigation/issues/697)
 * [Stackoverflow - React Native View onPress does not work](https://stackoverflow.com/questions/43665177/react-native-view-onpress-does-not-work)
+* [Stackoverflow - Basic FlatList code throws warning - React Native](https://stackoverflow.com/questions/44545148/basic-flatlist-code-throws-warning-react-native)

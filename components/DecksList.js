@@ -43,6 +43,12 @@ class DecksList extends Component {
 		return <Deck {...item} navigation={this.props.navigation} />
 	}
 
+	/*
+	 * Pass the index of the item in the array as key to the item.
+	 * Solution suggested by the project reviewer at Udacity.
+	 */
+	keyExtract = ({ item }, index) => index
+
 	render() {
 		const decks = this.props.decks;
 		const decksArray = [];
@@ -58,6 +64,7 @@ class DecksList extends Component {
 				<FlatList
 					data={decksArray}
 					extraData={this.props}
+					keyExtractor={this.keyExtract}
 					renderItem={this.renderItem}
 				/>
 			</View>
