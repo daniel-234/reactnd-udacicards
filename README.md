@@ -1,3 +1,7 @@
+# Update
+
+This project is not maintained anymore and it has been archived. 
+
 # UdaciCards Project
 
 The third and last project in the React Nanodegree course is a mobile application that allows users to study collections of flashcards.
